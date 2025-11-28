@@ -17,12 +17,58 @@ import Service from '../components/Service.astro'
 
 <Layout>
   <Header />
-  <Hero />
-  <Tools />
-  <Service />
-  <Works />
-  <VFX />
-  <Reviews />
+
+  <div class="fade-section">
+    <Hero />
+  </div>
+
+  <div class="fade-section">
+    <Tools />
+  </div>
+
+  <div class="fade-section">
+    <Service />
+  </div>
+
+  <div class="fade-section">
+    <Works />
+  </div>
+
+  <div class="fade-section">
+    <VFX />
+  </div>
+
+  <div class="fade-section">
+    <Reviews />
+  </div>
+
+  <div class="fade-section">
+    <CallToAction />
+  </div>
+
   <Footer />
+
+  <script>
+    if (typeof window !== 'undefined') {
+      const sections = document.querySelectorAll('.fade-section');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              // si no quieres que se oculten al subir otra vez, descomenta:
+              // observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+        }
+      );
+
+      sections.forEach((sec) => observer.observe(sec));
+    }
+  </script>
 </Layout>
 
