@@ -1,17 +1,17 @@
 const author = {
-    name: `Victor Melia`,
-    nickname: `Victor`,
+    name: `Víctor Melià`,
+    nickname: `Víctor`,
     tiktok: `https://www.tiktok.com/@codetonero`,
     ig: `https://www.instagram.com/codetonero/`,
     x: `https://x.com/codetonero`,
-    email: 'mailto:anthonylannn@gmail.com'
+    email: 'mailto:viktor.mjs@gmail.com'
 
 }
 
 
 const buy = {
     title: `See on Github`,
-    link: `https://github.com/anthonylan/angie`
+    link: ``
 }
 
 
