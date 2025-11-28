@@ -8,7 +8,7 @@ import goblinmancer from '../assets/Goblinmancer.PNG';
 import growing from '../assets/GrowingFear.png';
 import castellnovo from '../assets/CronicasCastellnovo.png';
 import leftalone from '../assets/LeftingAlone.png';
-import 127_iq from '../assets/127_IQ.png';
+import img127iq from '../assets/127_IQ.png';
 import deltaTime from '../assets/DeltaTime.PNG';
 
 
@@ -56,11 +56,74 @@ const portfolio = [
   { 
     name: '127 IQ', 
     desc: `Platformer - Solo dev`,
-    cover: 127_iq.src,
+    cover: img127iq.src,
     youtube: 'https://www.youtube.com/watch?v=c6DXEmj3P7A'
   },
 ]
 ---
 
 
-<section class="py-25 space-y-10 px-5" id="work"> <div class="max-w-md mx-auto relative"> <h1 class="text-4xl font-medium text-center">Video Game Portfolio</h1> <img src={svgUnderline.src} alt="arrow" width="140" class="absolute left-50 -bottom-1" /> </div> <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10"> {portfolio.map(item => ( <article class="flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)]"> <div class="w-full h-[200px] overflow-hidden border-2 relative"> {/* imagen */} <img src={item.cover} alt={item.name} class="w-full h-full object-cover transition duration-300 group-hover:blur-sm" /> {/* overlay con botones */} <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"> <div class="flex flex-col gap-3"> <a href={item.itch} target="_blank" rel="noreferrer" class="px-4 py-2 bg-white text-black font-medium text-sm text-center hover:bg-gray-200 transition rounded" > Play on itch.io </a> <a href={item.youtube} target="_blank" rel="noreferrer" class="px-4 py-2 bg-red-600 text-white font-medium text-sm text-center hover:bg-red-700 transition rounded" > Watch on YouTube </a> </div> </div> </div> <div class="space-y-1 pt-4"> <div class="flex pr-2"> <h2 class="text-xl font-medium flex-1">{item.name}</h2> <img src={arrowCard.src} alt="arrow" width="25" /> </div> <p class="mr-20">{item.desc}</p> </div> <Bars /> </article> ))} </div> </section>
+<section class="py-25 space-y-10 px-5" id="work">
+  <div class="max-w-md mx-auto relative">
+    <h1 class="text-4xl font-medium text-center">Video Game Portfolio</h1>
+    <img src={svgUnderline.src} alt="arrow" width="140" class="absolute left-50 -bottom-1" />
+  </div>
+
+  <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+    {portfolio.map(item => (
+      <article class="flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)]">
+        <div class="w-full h-[200px] overflow-hidden border-2 relative">
+
+          {/* imagen */}
+          <img
+            src={item.cover}
+            alt={item.name}
+            class="w-full h-full object-cover transition duration-300 group-hover:blur-sm"
+          />
+
+          {/* overlay con botones */}
+          <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="flex flex-col gap-3">
+
+              {/* itch.io si existe */}
+              {item.itch && (
+                <a
+                  href={item.itch}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="px-4 py-2 bg-white text-black font-medium text-sm text-center hover:bg-gray-200 transition rounded"
+                >
+                  Play on itch.io
+                </a>
+              )}
+
+              {/* YouTube si existe */}
+              {item.youtube && (
+                <a
+                  href={item.youtube}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="px-4 py-2 bg-red-600 text-white font-medium text-sm text-center hover:bg-red-700 transition rounded"
+                >
+                  Watch on YouTube
+                </a>
+              )}
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="space-y-1 pt-4">
+          <div class="flex pr-2">
+            <h2 class="text-xl font-medium flex-1">{item.name}</h2>
+            <img src={arrowCard.src} alt="arrow" width="25" />
+          </div>
+          <p class="mr-20">{item.desc}</p>
+        </div>
+
+        <Bars />
+      </article>
+    ))}
+  </div>
+</section>
