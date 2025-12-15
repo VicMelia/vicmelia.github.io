@@ -110,7 +110,7 @@ const portfolio = [
           */}
           <div class="absolute inset-0 z-30 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none">
             <p class="text-white text-sm font-medium drop-shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 leading-snug">
-              <span class="text-yellow-400 font-bold block text-xs mb-1 uppercase tracking-wider">My Role:</span>
+              <span class="text-yellow-400 font-bold block text-xs mb-1 uppercase tracking-wider">Description</span>
               {item.details}
             </p>
           </div>
@@ -165,12 +165,10 @@ const portfolio = [
   cards.forEach(card => {
     const videoId = card.getAttribute('data-video-id');
     
-    // Configuración de elementos
     const videoContainer = card.querySelector('.video-container');
     let timeoutId;
 
     card.addEventListener('mouseenter', () => {
-      // Si no hay video, no intentamos cargar iframe, pero dejamos que CSS haga el resto
       if (!videoId) return;
 
       timeoutId = setTimeout(() => {
@@ -178,9 +176,7 @@ const portfolio = [
         
         const iframe = document.createElement('iframe');
         
-        // CONSTRUCCIÓN SEGURA DE LA URL (Para evitar errores de "Unterminated string")
         const baseUrl = "https://www.youtube.com/embed/";
-        // Parametros: autoplay, mute (obligatorio), sin controles, loop, playlist (para el loop)
         const params = "?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&showinfo=0&rel=0";
         const fullUrl = baseUrl + videoId + params + "&playlist=" + videoId;
 
