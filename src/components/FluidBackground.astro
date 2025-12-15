@@ -1,0 +1,122 @@
+<div class="fluid-container">
+  <canvas id="fluid-canvas"></canvas>
+  <div class="backdrop-overlay"></div>
+</div>
+
+<style>
+  .fluid-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10;
+    overflow: hidden;
+    background: #FEFFF0;;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    filter: blur(80px);
+    opacity: 0.6;
+  }
+
+  .backdrop-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('fluid-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  let width, height;
+  let particles = [];
+
+  const particleCount = 6;
+  const mouseInfluence = 0.05;
+  
+  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD'];
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 2;
+      this.vy = (Math.random() - 0.5) * 2;
+      this.size = Math.random() * 200 + 150;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      
+      this.targetX = this.x;
+      this.targetY = this.y;
+    }
+
+    update(mouseX, mouseY) {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x < -this.size || this.x > width + this.size) this.vx *= -1;
+      if (this.y < -this.size || this.y > height + this.size) this.vy *= -1;
+
+      if (mouseX && mouseY) {
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 400) {
+            this.x -= dx * mouseInfluence * 0.5;
+            this.y -= dy * mouseInfluence * 0.5;
+        }
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    resize();
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  let mouseX = null;
+  let mouseY = null;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    
+    particles.forEach(p => {
+      p.update(mouseX, mouseY);
+      p.draw();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', resize);
+  
+  init();
+  animate();
+</script>
