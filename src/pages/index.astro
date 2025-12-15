@@ -2,6 +2,8 @@
 import '../styles/global.css'
 import Layout from "../layouts/Layout.astro"
 
+import FluidBackground from '../components/FluidBackground.astro' 
+
 import Header from '../components/Header.astro'
 import Hero from '../components/Hero.astro'
 import Tools from '../components/Tools.astro'
@@ -16,51 +18,52 @@ import Service from '../components/Service.astro'
 
 
 <Layout>
-  <Header />
+    <FluidBackground />
+    
+    <Header />
 
-  <div class="fade-section">
-    <Hero />
-  </div>
+    <div class="fade-section">
+        <Hero />
+    </div>
 
-  <div class="fade-section">
-    <Tools />
-  </div>
+    <div class="fade-section">
+        <Tools />
+    </div>
 
-  <div class="fade-section">
-    <Service />
-  </div>
+    <div class="fade-section">
+        <Service />
+    </div>
 
-  <div class="fade-section">
-    <Works />
-  </div>
+    <div class="fade-section">
+        <Works />
+    </div>
 
-  <div class="fade-section">
-    <Reviews />
-  </div>
+    <div class="fade-section">
+        <Reviews />
+    </div>
 
-  <Footer />
+    <Footer />
 
-  <script>
-    if (typeof window !== 'undefined') {
-      const sections = document.querySelectorAll('.fade-section');
+    <script>
+        if (typeof window !== 'undefined') {
+            const sections = document.querySelectorAll('.fade-section');
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              // si no quieres que se oculten al subir otra vez, descomenta:
-              // observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.15,
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            // Si quieres que el efecto de aparición solo ocurra una vez, descomenta la línea de abajo
+                            // observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.15,
+                }
+            );
+
+            sections.forEach((sec) => observer.observe(sec));
         }
-      );
-
-      sections.forEach((sec) => observer.observe(sec));
-    }
-  </script>
+    </script>
 </Layout>
-
