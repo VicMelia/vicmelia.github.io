@@ -1,6 +1,5 @@
 ---
 import Bars from "./Bars.astro"
-
 import svgUnderline from '../assets/underline.svg'
 import arrowCard from '../assets/arrow-card.svg'
 import robotSurvivor from '../assets/RobotSurvivor.png';
@@ -12,6 +11,12 @@ import img127iq from '../assets/127_IQ.png';
 import deltaTime from '../assets/DeltaTimeitch.png';
 import paper from '../assets/papercover.PNG';
 
+const getYouTubeId = (url) => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+};
 
 const portfolio = [
   { 
@@ -70,7 +75,6 @@ const portfolio = [
 ]
 ---
 
-
 <section class="py-25 space-y-10 px-5" id="work">
   <div class="max-w-md mx-auto relative">
     <h1 class="text-4xl font-medium text-center">Video Game Portfolio</h1>
@@ -78,60 +82,94 @@ const portfolio = [
   </div>
 
   <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-    {portfolio.map(item => (
-      <article class="flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[4px_4px_0px_rgba(0,0,0,0.3)]">
-        <div class="w-full h-[200px] overflow-hidden border-2 relative">
+    {portfolio.map(item => {
+      const videoId = getYouTubeId(item.youtube);
 
-          {/* imagen */}
+      return (
+      <article class="flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.2)] border border-gray-100">
+        
+        <div 
+            class="w-full h-[200px] overflow-hidden border-2 border-black relative game-card-media bg-black"
+            data-video-id={videoId}
+        >
           <img
             src={item.cover}
             alt={item.name}
-            class="w-full h-full object-cover transition duration-300 group-hover:blur-sm"
+            class="w-full h-full object-cover transition duration-300 relative z-10"
           />
 
-          {/* overlay con botones */}
-          <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div class="flex flex-col gap-3">
-
-              {/* itch.io si existe */}
-              {item.itch && (
-                <a
-                  href={item.itch}
-                  target="_blank"
-                  rel="noreferrer"
-                  class="px-4 py-2 bg-white text-black font-medium text-sm text-center hover:bg-gray-200 transition rounded"
-                >
-                  Play on itch.io
-                </a>
-              )}
-
-              {/* YouTube si existe */}
-              {item.youtube && (
-                <a
-                  href={item.youtube}
-                  target="_blank"
-                  rel="noreferrer"
-                  class="px-4 py-2 bg-red-600 text-white font-medium text-sm text-center hover:bg-red-700 transition rounded"
-                >
-                  Watch on YouTube
-                </a>
-              )}
-
-            </div>
-          </div>
-
+          <div class="video-container absolute inset-0 w-full h-full z-20 hidden"></div>
         </div>
 
-        <div class="space-y-1 pt-4">
-          <div class="flex pr-2">
-            <h2 class="text-xl font-medium flex-1">{item.name}</h2>
-            <img src={arrowCard.src} alt="arrow" width="25" />
+        <div class="space-y-1 pt-4 flex-1">
+          <div class="flex pr-2 items-center">
+            <h2 class="text-xl font-bold flex-1">{item.name}</h2>
+            <img src={arrowCard.src} alt="arrow" width="25" class="group-hover:translate-x-1 transition-transform" />
           </div>
-          <p class="mr-20">{item.desc}</p>
+          <p class="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
         </div>
 
-        <Bars />
+        <div class="mt-5 flex gap-3">
+            {item.itch && (
+              <a
+                href={item.itch}
+                target="_blank"
+                rel="noreferrer"
+                class="flex-1 py-2 px-3 bg-[#fa5c5c] text-white font-bold text-xs uppercase tracking-wide text-center border-2 border-transparent hover:border-black hover:bg-white hover:text-[#fa5c5c] transition-colors rounded shadow-sm"
+              >
+                Itch.io
+              </a>
+            )}
+
+            {item.youtube && (
+              <a
+                href={item.youtube}
+                target="_blank"
+                rel="noreferrer"
+                class="flex-1 py-2 px-3 bg-gray-900 text-white font-bold text-xs uppercase tracking-wide text-center border-2 border-transparent hover:border-black hover:bg-white hover:text-black transition-colors rounded shadow-sm"
+              >
+                YouTube
+              </a>
+            )}
+        </div>
+
+        <div class="mt-4">
+            <Bars />
+        </div>
       </article>
-    ))}
+    )})}
   </div>
 </section>
+
+<script>
+  const cards = document.querySelectorAll('.game-card-media');
+
+  cards.forEach(card => {
+    const videoId = card.getAttribute('data-video-id');
+    if (!videoId) return;
+
+    const videoContainer = card.querySelector('.video-container');
+    let timeoutId;
+
+    card.addEventListener('mouseenter', () => {
+      timeoutId = setTimeout(() => {
+        videoContainer.classList.remove('hidden');
+        
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${videoId}&showinfo=0&rel=0`);
+        iframe.setAttribute('class', 'w-full h-full object-cover pointer-events-none'); 
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        
+        videoContainer.innerHTML = '';
+        videoContainer.appendChild(iframe);
+      }, 50);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      clearTimeout(timeoutId);
+      videoContainer.classList.add('hidden');
+      videoContainer.innerHTML = '';
+    });
+  });
+</script>
