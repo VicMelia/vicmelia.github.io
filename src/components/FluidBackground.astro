@@ -1,6 +1,6 @@
 <div class="fluid-container">
   <canvas id="fluid-canvas"></canvas>
-  </div>
+</div>
 
 <style>
   .fluid-container {
@@ -19,7 +19,6 @@
     height: 100%;
     opacity: 0.3; 
   }
-
 </style>
 
 <script>
@@ -29,11 +28,10 @@
   let width, height;
   let particles = [];
 
-  const particleCount = 6;
+  const particleCount = 3;
   const mouseInfluence = 0.05;
   
-  // Colores: Usa tus colores preferidos
-  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD'];
+  const colors = ['#FF6B6B', '#45B7D1', '#FFEEAD'];
 
   function resize() {
     width = window.innerWidth;
@@ -48,7 +46,7 @@
       this.y = Math.random() * height;
       this.vx = (Math.random() - 0.5) * 2;
       this.vy = (Math.random() - 0.5) * 2;
-      this.size = Math.random() * 200 + 150;
+      this.size = Math.random() * 100 + 100; 
       this.color = colors[Math.floor(Math.random() * colors.length)];
       
       this.targetX = this.x;
