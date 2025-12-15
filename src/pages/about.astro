@@ -1,105 +1,51 @@
 ---
-import '../styles/global.css'
+import '../styles/global.css';
 import Layout from "../layouts/Layout.astro";
 
 import AppHeader from '../components/Header.astro';
 import AppFooter from '../components/Footer.astro';
 import foto from '../assets/cvportfolio.jpg';
 
+const title = "About me | Víctor Melià Vilar"; 
+
 const skills = [
-  "Unity & C# gameplay programming",
-  "HLSL / Shader Graph for custom rendering",
-  "Real-time VFX & particle systems",
-  "GPU compute & procedural techniques",
-  "Technical game design & tools",
-  "Profiling, optimization & clean code practices"
+  "Unity & C# gameplay programming",
+  "HLSL / Shader Graph for custom rendering",
+  "Real-time VFX & particle systems",
+  "GPU compute & procedural techniques",
+  "Technical game design & tools",
+  "Profiling, optimization & clean code practices"
 ];
 ---
 
-<Layout>
-  <AppHeader />
-  
-  <section class="py-40">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="mb-10">
-        <h1 class="title text-5xl font-black mb-3">About me</h1>
-      </div>
+<Layout title={title}>
+  <AppHeader />
+  
+  <section class="py-40">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="mb-10">
+        <h1 class="title text-5xl font-black mb-3">About me</h1>
+      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-start">
-        {/* FOTO IZQUIERDA */}
-        <div class="flex justify-center md:justify-start">
-          <div class="bg-white border-2 shadow-[6px_6px_0px_rgba(0,0,0,0.3)] p-3 max-w-xs w-full">
-            <div class="w-full aspect-[3/4] border-2 overflow-hidden">
-              <img 
-                src={foto.src} 
-                alt="Portrait of Victor Melia" 
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div class="mt-4 space-y-2">
-              <div>
-                <h2 class="text-xl font-bold">Víctor Melià Vilar</h2>
-                <p class="text-sm text-gray-700">
-                  Technical Artist & Game Engineer
-                </p>
-              </div>
+      <div class="grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-start">
+        {/* FOTO IZQUIERDA */}
+        <div class="flex justify-center md:justify-start">
+          <div class="bg-white border-2 shadow-[6px_6px_0px_rgba(0,0,0,0.3)] p-3 max-w-xs w-full">
+            <div class="w-full aspect-[3/4] border-2 overflow-hidden">
+              <img 
+                src={foto.src} 
+                alt="Portrait of Victor Melia" 
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="mt-4 space-y-2">
+              <div>
+                <h2 class="text-xl font-bold">Víctor Melià Vilar</h2>
+                <p class="text-sm text-gray-700">
+                  Technical Artist & Game Engineer
+                </p>
+              </div>
 
-              {/* Cartel correo */}
-              <div class="mt-2 border border-dashed border-gray-400 bg-gray-50 px-3 py-2 text-xs rounded">
-                <p class="uppercase tracking-wide font-semibold mb-1">Contact</p>
-                <a 
-                  href="mailto:viktor.mjs@gmail.com" 
-                  class="text-[13px] break-all underline text-blue-700"
-                >
-                  viktor.mjs@gmail.com
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* TEXTO + SKILLS DERECHA */}
-        <div class="space-y-6">
-          <div class="space-y-4 text-[15px] leading-relaxed">
-            <p>
-              I’m <strong>Víctor Melià Vilar</strong>, a Technical Artist and Game Engineer specialized in 
-              real-time graphics, VFX, and game development. I graduated in <strong>Game Design and Development</strong> 
-              at <strong>Universitat Jaume I (UJI)</strong>, where I built a strong foundation in both programming 
-              and visual design for interactive media.
-            </p>
-
-            <p>
-              For the past <strong>4 years</strong>, I’ve been working at <strong>Estudia i Investiga</strong> in 
-              <strong>R&amp;D</strong>, focusing on projects that bridge academic research and real-time technologies. 
-              My work often explores how rendering, shaders and visual feedback can enhance gameplay, immersion, and 
-              player experience.
-            </p>
-
-            <p>
-              I’ve also taken part in <strong>three Ministry-funded projects</strong>, collaborating with multidisciplinary 
-              teams to prototype new technologies, test experimental ideas, and push the boundaries of what’s possible in 
-              real-time applications and video games.
-            </p>
-
-            <p>
-              As a Technical Artist, I enjoy being the link between art and engineering: creating tools, shaders and VFX 
-              that are not only visually striking, but also performant, scalable, and friendly for the rest of the team.
-            </p>
-          </div>
-
-          <div class="bg-white border-2 p-5 shadow-[4px_4px_0px_rgba(0,0,0,0.3)]">
-            <h2 class="text-xl font-bold mb-3">Core skills</h2>
-            <ul class="list-disc list-inside space-y-1 text-sm">
-              {skills.map((skill) => (
-                <li>{skill}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <AppFooter />
-</Layout>
+              {/* Cartel correo */}
+              <div class="mt-2 border border-dashed border-gray-40
