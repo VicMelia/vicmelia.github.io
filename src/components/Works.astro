@@ -2,77 +2,77 @@
 import Bars from "./Bars.astro"
 import svgUnderline from '../assets/underline.svg'
 import arrowCard from '../assets/arrow-card.svg'
-import robotSurvivor from '../assets/RobotSurvivor.png';
-import goblinmancer from '../assets/Goblinmancer.PNG';
-import growing from '../assets/GrowingFear.png';
-import castellnovo from '../assets/castellnovoRecortado.jpg';
-import leftalone from '../assets/LeftAloneLogo.jpg';
-import img127iq from '../assets/127_IQ.png';
-import deltaTime from '../assets/DeltaTimeitch.png';
-import paper from '../assets/papercover.PNG';
+import robotSurvivor from '../assets/RobotSurvivor.png'
+import goblinmancer from '../assets/Goblinmancer.PNG'
+import growing from '../assets/GrowingFear.png'
+import castellnovo from '../assets/castellnovoRecortado.jpg'
+import leftalone from '../assets/LeftAloneLogo.jpg'
+import img127iq from '../assets/127_IQ.png'
+import deltaTime from '../assets/DeltaTimeitch.png'
+import paper from '../assets/papercover.PNG'
 
 const getYouTubeId = (url) => {
-  if (!url) return null;
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const match = url.match(regExp);
-  return (match && match[2].length === 11) ? match[2] : null;
-};
+  if (!url) return null
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+  const match = url.match(regExp)
+  return match && match[2].length === 11 ? match[2] : null
+}
 
 const portfolio = [
-  { 
-    name: 'Delta Time', 
-    desc: `Open-World Action RPG - Solo dev`,
+  {
+    name: 'Delta Time',
+    desc: 'Open-World Action RPG - Solo dev',
     details: 'Bachelor Thesis: Developed a custom 3D pixel art rendering engine in Unity. Implemented high-risk overheating mechanics and fast-paced combat.',
     cover: deltaTime.src,
     itch: 'https://vicmelia.itch.io/delta-time',
     youtube: 'https://youtu.be/jzMR-CSynDc'
   },
-  { 
-    name: 'Robot Survivor', 
-    desc: `Horde Survival - Solo dev`,
+  {
+    name: 'Robot Survivor',
+    desc: 'Horde Survival - Solo dev',
     details: 'Fight endless enemies, upgrade your robot, and survive as long as possible on a hostile alien planet.',
     cover: robotSurvivor.src,
     itch: 'https://vicmelia.itch.io/robot-survivor',
     youtube: 'https://youtu.be/RkS8gFprMt0'
   },
-  { 
-    name: 'Cronicas de Castellnovo', 
-    desc: `Educational Point & Click - Team Project`,
+  {
+    name: 'Cronicas de Castellnovo',
+    desc: 'Educational Point & Click - Team Project',
     details: 'Explore Castellnovo, interact with its inhabitants, and solve riddles to recover the Golden Romana.',
     cover: castellnovo.src,
     itch: 'https://vicmelia.itch.io/cronicas-de-castellnovo',
     youtube: 'https://www.youtube.com/watch?v=QYuvL1p8N3o'
   },
-  { 
-    name: 'Goblinmancer', 
-    desc: `RTS - Game Jam - BackToBits Studio`,
+  {
+    name: 'Goblinmancer',
+    desc: 'RTS - Game Jam - BackToBits Studio',
     details: 'Play as an evil goblin necromancer, also known as the almighty GOBLINMANCER!',
     cover: goblinmancer.src,
-    itch: 'https://kiskidiego.itch.io/goblinmancer',
+    itch: 'https://kiskidiego.itch.io/goblinmancer'
   },
-  { 
-    name: 'Growing Fear', 
-    desc: `Farming - Game Jam - BackToBits Studio`,
+  {
+    name: 'Growing Fear',
+    desc: 'Farming - Game Jam - BackToBits Studio',
     details: 'Do you enjoy the relaxing routine of farming, or are you an acolyte of the Old Gods? Then this is your game.',
     cover: growing.src,
-    itch: 'https://hollowblink.itch.io/growing-fear',
+    itch: 'https://hollowblink.itch.io/growing-fear'
   },
-  { 
-    name: 'Paper Shooter', 
-    desc: `Arcade - Solo Dev`,
+  {
+    name: 'Paper Shooter',
+    desc: 'Arcade - Solo Dev',
     details: 'A fast-paced typing-based arcade shooter where every keystroke is a shot.',
     cover: paper.src,
     itch: 'https://vicmelia.itch.io/paper-shooter',
     youtube: 'https://www.youtube.com/watch?v=tQzyVg-6hKo'
   },
-  { 
-    name: 'Left Alone', 
-    desc: `Survival - Game Jam - Team Project`,
+  {
+    name: 'Left Alone',
+    desc: 'Survival - Game Jam - Team Project',
     details: 'A 2-player co-op survival game where one explores the outside world and the other keeps a family alive in a bunker.',
     cover: leftalone.src,
     itch: 'https://vicmelia.itch.io/lefting-alone',
     youtube: 'https://www.youtube.com/watch?v=evTjKs0ekJI'
-  },
+  }
 ]
 ---
 
@@ -84,50 +84,43 @@ const portfolio = [
 
   <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
     {portfolio.map(item => {
-      const videoId = getYouTubeId(item.youtube);
+      const videoId = getYouTubeId(item.youtube)
 
       return (
-      <article class="flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.2)] border border-gray-100">
-        
-        {/* Contenedor MEDIA (Imagen + Video + Texto Overlay) */}
-        <div 
-            class="w-full h-[200px] overflow-hidden border-2 border-black relative game-card-media bg-black cursor-help"
+        <article class="flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.2)] border border-gray-100">
+
+          <div
+            class="w-full h-[200px] border-2 border-black bg-black cursor-help grid grid-cols-[60%_40%] overflow-hidden game-card-media"
             data-video-id={videoId}
-        >
-          {/* 1. La Imagen (Fondo) */}
-          <img
-            src={item.cover}
-            alt={item.name}
-            class="w-full h-full object-cover transition duration-300 relative z-10"
-          />
+          >
+            <div class="relative w-full h-full">
+              <img
+                src={item.cover}
+                alt={item.name}
+                class="w-full h-full object-cover transition duration-300 relative z-10"
+              />
+              <div class="video-container absolute inset-0 w-full h-full z-20 hidden"></div>
+            </div>
 
-          {/* 2. El Video (Se inyecta aquí, encima de imagen) */}
-          <div class="video-container absolute inset-0 w-full h-full z-20 hidden"></div>
-
-          {/* 3. El Texto Descriptivo (Encima de todo) 
-               - Usamos un gradiente negro abajo para que se lea bien el texto blanco.
-               - opacity-0 por defecto, opacity-100 en hover.
-          */}
-          <div class="absolute inset-0 z-30 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none">
-            <p class="text-white text-sm font-medium drop-shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 leading-snug">
-              <span class="text-yellow-400 font-bold block text-xs mb-1 uppercase tracking-wider">Description</span>
-              {item.details}
-            </p>
+            <div class="h-full p-3 bg-white border-l-2 border-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-auto">
+              <span class="text-yellow-500 font-bold block text-xs mb-1 uppercase tracking-wider">
+                Description
+              </span>
+              <p class="text-gray-800 text-sm leading-snug">
+                {item.details}
+              </p>
+            </div>
           </div>
 
-        </div>
-
-        {/* Info Principal */}
-        <div class="space-y-1 pt-4 flex-1">
-          <div class="flex pr-2 items-center">
-            <h2 class="text-xl font-bold flex-1">{item.name}</h2>
-            <img src={arrowCard.src} alt="arrow" width="25" class="group-hover:translate-x-1 transition-transform" />
+          <div class="space-y-1 pt-4 flex-1">
+            <div class="flex pr-2 items-center">
+              <h2 class="text-xl font-bold flex-1">{item.name}</h2>
+              <img src={arrowCard.src} alt="arrow" width="25" class="group-hover:translate-x-1 transition-transform" />
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
           </div>
-          <p class="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-        </div>
 
-        {/* Botones */}
-        <div class="mt-5 flex gap-3">
+          <div class="mt-5 flex gap-3">
             {item.itch && (
               <a
                 href={item.itch}
@@ -149,52 +142,51 @@ const portfolio = [
                 YouTube
               </a>
             )}
-        </div>
+          </div>
 
-        <div class="mt-4">
+          <div class="mt-4">
             <Bars />
-        </div>
-      </article>
-    )})}
+          </div>
+        </article>
+      )
+    })}
   </div>
 </section>
 
 <script>
-  const cards = document.querySelectorAll('.game-card-media');
+  const cards = document.querySelectorAll('.game-card-media')
 
   cards.forEach(card => {
-    const videoId = card.getAttribute('data-video-id');
-    
-    const videoContainer = card.querySelector('.video-container');
-    let timeoutId;
+    const videoId = card.getAttribute('data-video-id')
+    const videoContainer = card.querySelector('.video-container')
+    let timeoutId
 
     card.addEventListener('mouseenter', () => {
-      if (!videoId) return;
+      if (!videoId) return
 
       timeoutId = setTimeout(() => {
-        videoContainer.classList.remove('hidden');
-        
-        const iframe = document.createElement('iframe');
-        
-        const baseUrl = "https://www.youtube.com/embed/";
-        const params = "?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&showinfo=0&rel=0";
-        const fullUrl = baseUrl + videoId + params + "&playlist=" + videoId;
+        videoContainer.classList.remove('hidden')
 
-        iframe.setAttribute('src', fullUrl);
-        iframe.setAttribute('class', 'w-full h-full object-cover pointer-events-none'); 
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-        
-        videoContainer.innerHTML = '';
-        videoContainer.appendChild(iframe);
-      }, 50);
-    });
+        const iframe = document.createElement('iframe')
+        const baseUrl = "https://www.youtube.com/embed/"
+        const params = "?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&showinfo=0&rel=0"
+        const fullUrl = baseUrl + videoId + params + "&playlist=" + videoId
+
+        iframe.setAttribute('src', fullUrl)
+        iframe.setAttribute('class', 'w-full h-full object-cover pointer-events-none')
+        iframe.setAttribute('frameborder', '0')
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture')
+
+        videoContainer.innerHTML = ''
+        videoContainer.appendChild(iframe)
+      }, 50)
+    })
 
     card.addEventListener('mouseleave', () => {
-      if (!videoId) return;
-      clearTimeout(timeoutId);
-      videoContainer.classList.add('hidden');
-      videoContainer.innerHTML = '';
-    });
-  });
+      if (!videoId) return
+      clearTimeout(timeoutId)
+      videoContainer.classList.add('hidden')
+      videoContainer.innerHTML = ''
+    })
+  })
 </script>
