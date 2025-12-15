@@ -170,4 +170,42 @@ const portfolio = [
   const cards = document.querySelectorAll('.game-card-media');
 
   cards.forEach(card => {
-    const videoId = card.getAttribute('data-video-
+    const videoId = card.getAttribute('data-video-id');
+    
+    // Configuración de elementos
+    const videoContainer = card.querySelector('.video-container');
+    let timeoutId;
+
+    card.addEventListener('mouseenter', () => {
+      // Si no hay video, no intentamos cargar iframe, pero dejamos que CSS haga el resto
+      if (!videoId) return;
+
+      timeoutId = setTimeout(() => {
+        videoContainer.classList.remove('hidden');
+        
+        const iframe = document.createElement('iframe');
+        
+        // CONSTRUCCIÓN SEGURA DE LA URL (Para evitar errores de "Unterminated string")
+        const baseUrl = "https://www.youtube.com/embed/";
+        // Parametros: autoplay, mute (obligatorio), sin controles, loop, playlist (para el loop)
+        const params = "?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&showinfo=0&rel=0";
+        const fullUrl = baseUrl + videoId + params + "&playlist=" + videoId;
+
+        iframe.setAttribute('src', fullUrl);
+        iframe.setAttribute('class', 'w-full h-full object-cover pointer-events-none'); 
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        
+        videoContainer.innerHTML = '';
+        videoContainer.appendChild(iframe);
+      }, 50);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (!videoId) return;
+      clearTimeout(timeoutId);
+      videoContainer.classList.add('hidden');
+      videoContainer.innerHTML = '';
+    });
+  });
+</script>
