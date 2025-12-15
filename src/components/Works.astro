@@ -65,7 +65,8 @@ const portfolio = [
   {
     name: "Paper Shooter",
     desc: "Arcade - Solo Dev",
-    details: "A fast-paced typing-based arcade shooter where every keystroke is a shot.",
+    details:
+      "A fast-paced typing-based arcade shooter where every keystroke is a shot.",
     cover: paper.src,
     itch: "https://vicmelia.itch.io/paper-shooter",
     youtube: "https://www.youtube.com/watch?v=tQzyVg-6hKo",
@@ -95,7 +96,7 @@ const portfolio = [
 
       return (
         <article
-          class={`flex flex-col bg-white p-5 group relative transition-all duration-200 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.2)] border border-gray-100 overflow-visible ${sideClass}`}
+          class={`flex flex-col bg-white p-5 group relative border border-gray-100 overflow-visible transition-all duration-200 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.2)] ${sideClass}`}
         >
           <div
             class="w-full h-[200px] border-2 border-black relative game-card-media bg-black"
@@ -104,12 +105,12 @@ const portfolio = [
             <img
               src={item.cover}
               alt={item.name}
-              class="w-full h-full object-cover transition duration-300 relative z-10"
+              class="w-full h-full object-cover relative z-10"
             />
 
             <div class="video-container absolute inset-0 w-full h-full z-20 hidden"></div>
 
-            <div class="desc-panel absolute top-0 h-full w-[280px] bg-white border-2 border-black p-3 opacity-0 pointer-events-none transition-all duration-300 overflow-auto z-[999] shadow-[8px_8px_0px_rgba(0,0,0,0.2)]">
+            <div class="desc-panel absolute top-0 h-full w-[280px] bg-white border-2 border-black p-3 opacity-0 pointer-events-none overflow-auto z-[999] shadow-[8px_8px_0px_rgba(0,0,0,0.2)]">
               <span class="text-yellow-500 font-bold block text-xs mb-1 uppercase tracking-wider">
                 Description
               </span>
@@ -184,7 +185,7 @@ const portfolio = [
         const fullUrl = baseUrl + videoId + params + "&playlist=" + videoId
 
         iframe.setAttribute("src", fullUrl)
-        iframe.setAttribute("class", "w-full h-full object-cover pointer-events-none")
+        iframe.setAttribute("class", "w-full h-full pointer-events-none")
         iframe.setAttribute("frameborder", "0")
         iframe.setAttribute(
           "allow",
@@ -206,18 +207,29 @@ const portfolio = [
 </script>
 
 <style>
+  .desc-panel {
+    transition: transform 260ms ease, opacity 200ms ease;
+    will-change: transform, opacity;
+  }
+
   .desc-left .desc-panel {
     left: 0;
-    transform: translateX(calc(-100% - 16px));
+    transform: translateX(calc(-100% - 16px)) translateX(24px);
   }
 
   .desc-right .desc-panel {
     right: 0;
-    transform: translateX(calc(100% + 16px));
+    transform: translateX(calc(100% + 16px)) translateX(-24px);
   }
 
-  .group:hover .desc-panel {
+  .desc-left:hover .desc-panel,
+  .desc-right:hover .desc-panel {
     opacity: 1;
     pointer-events: auto;
+    transform: translateX(calc(-100% - 16px));
+  }
+
+  .desc-right:hover .desc-panel {
+    transform: translateX(calc(100% + 16px));
   }
 </style>
