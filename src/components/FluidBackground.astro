@@ -8,7 +8,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 800vh;
     z-index: -10;
     overflow: hidden;
     background: #FEFFF0;
@@ -17,7 +17,8 @@
   canvas {
     width: 100%;
     height: 100%;
-    opacity: 0.4; 
+    opacity: 0.4;
+    pointer-events: none; 
   }
 </style>
 
@@ -29,7 +30,7 @@
   let particles = [];
 
   const particleCount = 3;
-  const mouseInfluence = 0.05;
+  const mouseInfluence = 0.01;
   
   // Los 3 colores definidos
   const colors = ['#FF6B6B', '#45B7D1', '#FFEEAD'];
@@ -67,7 +68,7 @@
         const dy = mouseY - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 400) {
+        if (distance < 100) {
             this.x -= dx * mouseInfluence * 0.5;
             this.y -= dy * mouseInfluence * 0.5;
         }
